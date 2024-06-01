@@ -1,0 +1,3 @@
+{
+  "ae3129a4959e51d9c0e64789e14fd348e6ca890d13781cf4465e4d1bd3a65b3f": "query GetCallData {\n  callDatas(orderBy: id, first: 474) {\n    id\n    functionName\n    params\n  }\n}"
+}

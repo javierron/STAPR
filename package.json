@@ -12,5 +12,8 @@
     "graphql": "^16.8.1",
     "minimist": "^1.2.8",
     "yaml": "^2.4.2"
+  },
+  "devDependencies": {
+    "@graphprotocol/client-cli": "^3.0.3"
   }
 }

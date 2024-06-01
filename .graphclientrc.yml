@@ -1,0 +1,9 @@
+# .graphclientrc.yml
+sources:
+  - name: "token"
+    handler:
+      graphql:
+        endpoint: "https://api.studio.thegraph.com/query/77042/token/version/latest"
+
+documents:
+  - ./query.graphql
