@@ -1,0 +1,6 @@
+type CallData @entity{
+    id: Bytes!
+    functionName: String!
+    params: [String!]!
+}
+
