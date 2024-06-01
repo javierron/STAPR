@@ -80,4 +80,4 @@ To replay the call history and test invariants:
 - STAPER currently only works for contracts in Ethereum mainnet
 - Only self-contained contracts are supported
 - Invariants must be manually inserted in tests
-
+- Automatic handling of reverted calls
