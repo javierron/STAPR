@@ -38,13 +38,14 @@ STAPR is also able to replay the call history for patched contracts:
 - It runs the test and validates the invariants: the patched contract's behavior does not diverge from the original, and the fault which is the fix target does not occur.
 
 ## Requirements
-    - node.js (nvm)
-    - graphprotocol/graph-cli
-    - graphprotocol/client-cli
-    - solc
-    - solc-select
-    - curl
-    - forge
+    node.js (nvm)
+    python
+    graphprotocol/graph-cli
+    graphprotocol/client-cli
+    solc
+    solc-select
+    curl
+    forge
 
 ## Usage
 ### Setting the subgraph with the call history
