@@ -1,0 +1,75 @@
+[
+  {
+    "function_name": "transfer",
+    "parameters": [
+      {
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "function_name": "approve",
+    "parameters": [
+      {
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "function_name": "transferFrom",
+    "parameters": [
+      {
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "function_name": "increaseAllowance",
+    "parameters": [
+      {
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "name": "addedValue",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "function_name": "decreaseAllowance",
+    "parameters": [
+      {
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "name": "subtractedValue",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "function_name": "mint",
+    "parameters": []
+  }
+]
