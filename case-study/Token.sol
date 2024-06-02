@@ -486,14 +486,13 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
  * `ERC20` functions.
  */
 contract Token is ERC20 {
-    address _owner;
-    constructor () ERC20("UERII", "UERII")  {
-        _owner= msg.sender;
+
+    constructor () ERC20("UERII", "UERII") {
+        
         _mint(msg.sender, 100000000000000000);
     }
     
-    function mint() public  returns (bool) {
-        require(msg.sender == _owner, "Only owner can mint");
+    function mint() public returns (bool) {
         _mint( msg.sender, 100000000000000000 );
         return true;
     }
