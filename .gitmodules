@@ -1,0 +1,3 @@
+[submodule "STAPR/lib/forge-std"]
+	path = STAPR/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
