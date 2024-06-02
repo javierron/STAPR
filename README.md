@@ -81,7 +81,8 @@ curl -L https://foundry.paradigm.xyz | bash
 
 To set up foundry & forge:
 ```
-foundryup --branch master
+cargo install --git https://github.com/foundry-rs/foundry --profile local --locked forge cast chisel anvil
+
 forge install
 forge init STAPR
 cd STAPR
