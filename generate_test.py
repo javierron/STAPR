@@ -105,7 +105,7 @@ def fill_template(template_path, output_path, placeholders):
 
 
 #print(f'Generated Solidity file at {output_path}')
-
+import os
 
 def main():
     print("RECEIVING ARGUMENTS")
@@ -151,7 +151,7 @@ def main():
     # Path to the template file
     template_path = 'test-template.txt'
     # Path to the output file
-    output_path = f'../STAPR/test/{contract_name}.t.sol'
+    output_path = f'STAPR/test/{contract_name}.t.sol'
     fill_template(template_path,output_path,placeholders)
 
 
