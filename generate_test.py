@@ -134,7 +134,7 @@ def main():
     revert_nodes=args.revert_nodes
 
 
-    function_glosary=convert_json_to_dict("public_functions.json")
+    function_glosary=convert_json_to_dict("functions.json")
     print(function_glosary)
     functions, attack =prepare_function_calls("calls.json",function_glosary,node_before_attack,revert_nodes)
 
@@ -151,7 +151,7 @@ def main():
     # Path to the template file
     template_path = 'test-template.txt'
     # Path to the output file
-    output_path = f'../ethprague/test/{contract_name}.t.sol'
+    output_path = f'../STAPR/test/{contract_name}.t.sol'
     fill_template(template_path,output_path,placeholders)
 
 
