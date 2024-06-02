@@ -83,8 +83,8 @@ To set up foundry & forge:
 ```
 foundryup --branch master
 forge install
-forge init SATPR
-cd SATPR
+forge init STAPR
+cd STAPR
 
 forge init --template PaulRBerg/foundry-template
 
@@ -100,15 +100,34 @@ Check forge is running by using the command:
 forge test --match-path test/Foo.t.sol -vvvv
 ```
 
-### Generate the test using the subgraph
+### Generate the test from the subgraph data
+Now we want to automatically generate the test 
+For that we created a template test and a script that need some detail data and will generate a Test file with 2 tests:
+1. testLogic(): runs all transactions before the attack. Proof for logic
+2. testAttack(): runs the attack block
+
+To generate your test you have to run generate_test.py with the commands that relate to your case.
 ```
-forge test --match-path test/Foo.t.sol -vvvv
+python3 generate_test.py --help
+```
+An example
 ```
 
+python3 generate_test.py  --node_before_attack 15767899 --sol_version 'pragma solidity ^0.8.0;' --contract 'Token.sol' --real 'cont.totalSupply()' --expected '100000000000000000' --revert_nodes 14702874,15588293,15589794,15767838
+```
+
+Executing the last command will generate Token.t.sol on STAPR/test
+
+Now make sure your patch or file to test is locate under the same name (without the .t) in STAPR/src. In the example is Token.sol.
+
+And now you can run your test:
+```
+forge test --match-path test/Token.t.sol -vvvv
+```
 
 
 ## Limitations -> Future Work
-- STAPER currently only works for contracts in Ethereum mainnet
+- STAPR currently only works for contracts in Ethereum mainnet
 - Only self-contained contracts are supported
 - Invariants must be manually inserted in tests
 - Automatic handling of reverted calls
