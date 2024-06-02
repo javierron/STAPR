@@ -47,7 +47,7 @@ STAPR is also able to replay the call history for patched contracts:
     - forge
 
 ## Usage
-
+### Setting the subgraph with the call history
 To create the subgraph locally:
 
 ```
@@ -71,10 +71,40 @@ graphclient build --fileType json
 node query.js
 ```
 
-To replay the call history and test invariants:
+### Setting test platform 
+
+To install foundry
+```
+curl -L https://foundry.paradigm.xyz | bash
+```
+
+To set up foundry & forge:
+```
+foundryup --branch master
+forge install
+forge init SATPR
+cd SATPR
+
+forge init --template PaulRBerg/foundry-template
 
 ```
+
+If having problems with running forge try:
 ```
+echo forge-std/=lib/forge-std/ > remappings.txt
+```
+
+Check forge is running by using the command:
+```
+forge test --match-path test/Foo.t.sol -vvvv
+```
+
+### Generate the test using the subgraph
+```
+forge test --match-path test/Foo.t.sol -vvvv
+```
+
+
 
 ## Limitations -> Future Work
 - STAPER currently only works for contracts in Ethereum mainnet
