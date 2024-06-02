@@ -1,0 +1,29 @@
+<SOL_VERSION>
+
+import "forge-std/src/Test.sol";
+import {<CONTRACT>} from "../src/<CONTRACT_FILE>";
+
+contract <CONTRACT>Test is Test{
+    <CONTRACT> public cont;
+
+    // setUp function runs before each test, setting up the environment
+    function setUp() public {
+        cont = new <CONTRACT>(); 
+    }
+
+    function testLogic() public {
+        
+<FUNCTION_CALLS>
+    }
+
+/// forge-config:default.invariant.fail-on-revert = false
+    function testExploit() public {
+        // from the attack transfer
+        vm.prank(address(0));
+        vm.expectRevert(bytes("Only owner can mint"));
+<ATTACKER_CALLS>
+        assertEq(<REAL>, <EXPECTED>);
+    }
+
+
+}
