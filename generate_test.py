@@ -32,7 +32,8 @@ def convert_json_to_dict(file_path):
 
 
 
-def prepare_function_calls(subgraph_path,function_glosary,node_before_attack):
+def prepare_function_calls(subgraph_path,function_glosary,node_before_attack, revert_nodes):
+    print(revert_nodes)
     # Read the JSON file
     with open(subgraph_path, 'r') as file:
         data = json.load(file)
@@ -47,6 +48,8 @@ def prepare_function_calls(subgraph_path,function_glosary,node_before_attack):
         function_name = call.get('functionName')
         params = call.get('params', [])
         function_line=''
+        if call_id in revert_nodes:
+            function_line+= f'        vm.expectRevert(bytes("ERC20: transfer amount exceeds balance"));\n'
         if params == []:
             function_line+= f'        cont.{function_name}();\n'
         else:
@@ -64,8 +67,10 @@ def prepare_function_calls(subgraph_path,function_glosary,node_before_attack):
             function_line+=");\n"
         if int(call_id) > node_before_attack:
             pass
-        if int(call_id) ==node_before_attack:
-            attacker_call=function_line
+        if int(call_id) == node_before_attack:
+            attacker_call= '        vm.prank(address(0));\n'
+            attacker_call+='        vm.expectRevert(bytes("Only owner can mint"));'
+            attacker_call+=function_line
             return string_builder,attacker_call
         else:
             string_builder+=function_line
@@ -105,13 +110,15 @@ def fill_template(template_path, output_path, placeholders):
 def main():
     print("RECEIVING ARGUMENTS")
     parser = argparse.ArgumentParser(description="Process some Solidity parameters.")
-    
+    def list_of_strings(arg):
+        return arg.split(',')
     # Define the arguments
-    parser.add_argument('--node_before_attack', type=int, required=True, help="The node before attack")
+    parser.add_argument('--node_before_attack', type=int, required=True, help="The node of the attack")
     parser.add_argument('--sol_version', type=str, required=True, help="The Solidity version")
     parser.add_argument('--contract', type=str, required=True, help="The contract file name")
     parser.add_argument('--real', type=str, required=True, help="The real value to compare")
     parser.add_argument('--expected', type=str, required=True, help="The expected value for comparison")
+    parser.add_argument('--revert_nodes',type=list_of_strings, required=True, help="The list of nodes that are expected to revert")
 
     # Parse the arguments
     args = parser.parse_args()
@@ -124,11 +131,12 @@ def main():
     contract_name = contract[:-4]  # Remove the '.sol' extension
     real=args.real
     expected=args.expected
+    revert_nodes=args.revert_nodes
 
 
     function_glosary=convert_json_to_dict("public_functions.json")
     print(function_glosary)
-    functions, attack =prepare_function_calls("calls.json",function_glosary,node_before_attack)
+    functions, attack =prepare_function_calls("calls.json",function_glosary,node_before_attack,revert_nodes)
 
     # Define placeholders and their values
     placeholders = {
